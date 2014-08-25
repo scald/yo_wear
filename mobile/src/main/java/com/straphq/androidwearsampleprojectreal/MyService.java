@@ -29,6 +29,8 @@ public class MyService extends WearableListenerService {
     private static final String START_ACTIVITY_PATH = "/start-activity";
     private static final String DATA_ITEM_RECEIVED_PATH = "/data-item-received";
 
+    private static final String url =  "http://api.justyo.co/yo/";
+
     private final StrapMetrics sm = new StrapMetrics();
 
 
@@ -68,6 +70,12 @@ public class MyService extends WearableListenerService {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            } else {
+
+                String query = "api_token=4a137da6-ba8d-ed75-a058-6b8d0822a0df"
+                        + "&username=" + map.getString("voiceCommand");
+
+                PostLog yoRequest = new PostLog(url, query);
             }
         }
         dataEvents.release();
