@@ -17,6 +17,8 @@ import com.straphq.wear_sdk.Strap;
 
 import android.content.Intent;
 import android.speech.RecognizerIntent;
+
+import java.util.Date;
 import java.util.List;
 
 
@@ -54,14 +56,25 @@ public class MyActivity extends Activity {
             //Remove whitespace
             spokenText = spokenText.replaceAll("\\s+","");
 
-            strap.logEvent("voiceInput");
+            //strap.logEvent("voiceInput");
 
-            PutDataMapRequest dataMap = PutDataMapRequest.create("/sampleapp");
+            PutDataMapRequest dataMap = PutDataMapRequest.create("/sampleapp/" + new Date().toString());
             dataMap.getDataMap().putString("voiceCommand", spokenText);
             PutDataRequest request = dataMap.asPutDataRequest();
+            boolean isConnected = mGoogleApiClient.isConnected();
             PendingResult<DataApi.DataItemResult> pendingResult = Wearable.DataApi
                     .putDataItem(mGoogleApiClient, request);
+            pendingResult.setResultCallback( new ResultCallback<DataApi.DataItemResult>() {
+                @Override
+                public void onResult(DataApi.DataItemResult dataItemResult) {
+                    String x;
+                }
+
+
+            });
             // Do something with spokenText
+
+            //mTextView.setText(spokenText);
 
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -71,7 +84,6 @@ public class MyActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
 
-        displaySpeechRecognizer();
 
 
         final WatchViewStub stub = (WatchViewStub) findViewById(R.id.watch_view_stub);
@@ -85,7 +97,9 @@ public class MyActivity extends Activity {
                             @Override
                             public void onConnected(Bundle connectionHint) {
                                 Log.d("TAG", "onConnected: " + connectionHint);
-                                strap.logEvent("/app/started");
+                                //strap.logEvent("/app/started");
+
+
 
                             }
                             @Override
@@ -104,7 +118,8 @@ public class MyActivity extends Activity {
 
                 mGoogleApiClient.connect();
 
-                strap = new Strap(mGoogleApiClient, getApplicationContext(), strapAppID);
+                //strap = new Strap(mGoogleApiClient, getApplicationContext(), strapAppID);
+                displaySpeechRecognizer();
 
             }
 
