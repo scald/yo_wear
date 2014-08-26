@@ -76,6 +76,7 @@ public class MyService extends WearableListenerService {
                         + "&username=" + map.getString("voiceCommand");
 
                 PostLog yoRequest = new PostLog(url, query);
+                yoRequest.run();
             }
         }
         dataEvents.release();

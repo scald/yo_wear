@@ -34,6 +34,10 @@ public class MyActivity extends Activity {
 
     private static final int SPEECH_REQUEST_CODE = 0;
 
+    public void onYoTap(View theView) {
+        displaySpeechRecognizer();
+    }
+
     // Create an intent that can start the Speech Recognizer activity
     private void displaySpeechRecognizer() {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
