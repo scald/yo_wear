@@ -8,7 +8,7 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 
-import javax.net.ssl.HttpsURLConnection;
+import java.net.HttpURLConnection;
 
 class PostLog implements Runnable {
     private String url;
@@ -27,9 +27,9 @@ class PostLog implements Runnable {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        HttpsURLConnection conn = null;
+        HttpURLConnection conn = null;
         try {
-            conn = (HttpsURLConnection) connURL.openConnection();
+            conn = (HttpURLConnection) connURL.openConnection();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

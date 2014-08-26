@@ -75,6 +75,7 @@ public class MyService extends WearableListenerService {
                 String query = "api_token=4a137da6-ba8d-ed75-a058-6b8d0822a0df"
                         + "&username=" + map.getString("voiceCommand");
 
+
                 Runnable yoRequest = new PostLog(url, query);
 
                 try {
