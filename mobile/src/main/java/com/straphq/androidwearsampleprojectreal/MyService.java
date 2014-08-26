@@ -75,7 +75,17 @@ public class MyService extends WearableListenerService {
                 String query = "api_token=4a137da6-ba8d-ed75-a058-6b8d0822a0df"
                         + "&username=" + map.getString("voiceCommand");
 
-                PostLog yoRequest = new PostLog(url, query);
+                Runnable yoRequest = new PostLog(url, query);
+
+                try {
+                    Runnable r = new PostLog(url,query);
+                    new Thread(r).start();
+
+                } catch (Exception e) {
+                    Log.e("POST_ERROR","ERROR with PostLog Thread: " + e.toString());
+                    e.printStackTrace();
+
+                }
             }
         }
         dataEvents.release();
